@@ -55,7 +55,7 @@ EOS
 
     private
     def put_version
-      puts "ImageCollector version #{ImageCollector::VERSION::STRING}"
+      puts "ImageCollector, version #{ImageCollector::VERSION::STRING}"
     end
 
     def init_dir(dir)

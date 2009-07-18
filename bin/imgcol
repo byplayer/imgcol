@@ -1,0 +1,21 @@
+require "optparse"
+require "ImageCollector"
+
+imageCollector = ImageCollector::Collector.new
+options = {}
+
+opts = OptionParser.new
+opts.on("-v", "--version"){|d| options[:put_version] = true }
+opts.on("-u VALUE"){|v| options[:url] = v }
+opts.on("-f VALUE"){|v| options[:file] = v }
+opts.on("-d VALUE"){|v| options[:dir] = v }
+
+begin
+  opts.parse!(ARGV)
+
+  imageCollector.collect(options)
+rescue OptionParser::MissingArgument => e
+  puts e.to_s
+
+  imageCollector.usage
+end
