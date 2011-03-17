@@ -28,7 +28,7 @@ module ImageCollector
                 init_dir(dir)
               end
               collect_contents(line)
-              sleep(0.5)
+              sleep(0.25)
             else
               unless line.empty?
                 # dir = Kconv.kconv(line, Kconv::SJIS).unpack('a*')[0].chomp
@@ -55,7 +55,7 @@ EOS
 
     private
     def put_version
-      puts "ImageCollector, version #{ImageCollector::VERSION::STRING}"
+      puts "ImageCollector version #{ImageCollector::VERSION::STRING}"
     end
 
     def init_dir(dir)
@@ -94,7 +94,7 @@ EOS
 
     def collect_data(url, search_image = true)
       begin
-        @agent = WWW::Mechanize.new
+        @agent = Mechanize.new
         @agent.user_agent_alias = 'Windows IE 7'
 
         @logger.info("get start: #{url}")
@@ -103,7 +103,7 @@ EOS
         # @logger.debug(page.body)
         # @logger.debug("=====================")
 
-        if search_image && page.is_a?(WWW::Mechanize::Page)
+        if search_image && page.is_a?(Mechanize::Page)
           @logger.info("collect page start: #{url}")
 
           image_list(url, page).each do |image_url|
